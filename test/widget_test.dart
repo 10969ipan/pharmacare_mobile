@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pharmacare/main.dart';
+import 'package:pharmacare_mobile/main.dart';
 
 void main() {
   testWidgets('App loads smoke test', (WidgetTester tester) async {
