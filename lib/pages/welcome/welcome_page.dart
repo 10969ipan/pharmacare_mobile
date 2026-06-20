@@ -17,15 +17,19 @@ class WelcomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch, // Meluaskan isi menyamping penuh
           children: [
             const Spacer(), // Pendorong bagian atas
-            Image.asset(
-              'assets/images/dokter.webp', /// Ilustrasi dokter selamat datang
-              height: 280, fit: BoxFit.contain, // Batasan dimensi gambar
-              errorBuilder: (_, _, _) => Container(
-                height: 240, decoration: BoxDecoration(color: Colors.blue[50], borderRadius: BorderRadius.circular(20)), // Fallback kontainer bulat biru jika gambar error
-                child: const Icon(Icons.local_pharmacy_rounded, size: 100, color: Color(0xFF1E88E5)), // Ikon medis darurat fallback
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 40.0), // Jarak spasi vertikal teks logo
+              child: const Text(
+                'Pharmacare',
+                textAlign: TextAlign.center, // Ratakan teks di tengah
+                style: TextStyle(
+                  fontSize: 38,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.2,
+                  color: Color(0xFF1E88E5), // Warna logo biru keseluruhan
+                ),
               ),
             ),
-            const SizedBox(height: 40), // Jarak pemisah di bawah gambar
             const Text("Selamat Datang", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFF1E88E5)), textAlign: TextAlign.center), // Teks judul utama
             const SizedBox(height: 12), // Jarak di bawah judul utama
             Text(

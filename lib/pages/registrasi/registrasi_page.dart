@@ -63,14 +63,14 @@ class _RegisterPageState extends State<RegisterPage> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 40.0), // Jarak spasi vertikal teks logo
-              child: RichText(
+              child: const Text(
+                'Pharmacare',
                 textAlign: TextAlign.center, // Ratakan teks di tengah
-                text: const TextSpan(
-                  style: TextStyle(fontSize: 38, fontWeight: FontWeight.bold, letterSpacing: 1.2), // Gaya teks dasar logo
-                  children: [
-                    TextSpan(text: 'Pharma', style: TextStyle(color: Color(0xFF1E88E5))), // Suku kata Pharma berwarna biru
-                    TextSpan(text: 'care', style: TextStyle(color: Colors.green)), // Suku kata care berwarna hijau
-                  ],
+                style: TextStyle(
+                  fontSize: 38,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.2,
+                  color: Color(0xFF1E88E5), // Warna logo biru keseluruhan
                 ),
               ),
             ),
