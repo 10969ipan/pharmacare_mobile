@@ -1,62 +1,63 @@
+// Data Katalog Obat yang Tersedia di Pharmacare
 List<Map<String, dynamic>> obatList = [
   {
-    'judul': 'Amlodipine Besylate 10mg',
-    'harga': 'Rp 12.000',
-    'foto': 'assets/images/amlodipine.webp',
-    'kategori': 'Resep',
+    'judul': 'Amlodipine Besylate 10mg', // Nama produk obat hipertensi
+    'harga': 'Rp 12.000', // Harga obat per strip
+    'foto': 'assets/images/amlodipine.webp', // Path file gambar produk
+    'kategori': 'Resep', // Kategori obat (butuh resep dokter)
   },
   {
-    'judul': 'Amoxicillin Trihydrate 500mg',
-    'harga': 'Rp 15.500',
-    'foto': 'assets/images/amoxicillin.webp',
-    'kategori': 'Resep',
+    'judul': 'Amoxicillin Trihydrate 500mg', // Nama produk obat antibiotik
+    'harga': 'Rp 15.500', // Harga obat per strip
+    'foto': 'assets/images/amoxicillin.webp', // Path file gambar produk
+    'kategori': 'Resep', // Kategori obat (butuh resep dokter)
   },
   {
-    'judul': 'Betadine Antiseptic Solution',
-    'harga': 'Rp 21.000',
-    'foto': 'assets/images/betadine.webp',
-    'kategori': 'Bebas',
+    'judul': 'Betadine Antiseptic Solution', // Nama produk obat antiseptik luka
+    'harga': 'Rp 21.000', // Harga obat per botol
+    'foto': 'assets/images/betadine.webp', // Path file gambar produk
+    'kategori': 'Bebas', // Kategori obat (dijual bebas tanpa resep)
   },
   {
-    'judul': 'Cetirizine Dihydrochloride 10mg',
-    'harga': 'Rp 9.000',
-    'foto': 'assets/images/cetirizine.webp',
-    'kategori': 'Bebas',
+    'judul': 'Cetirizine Dihydrochloride 10mg', // Nama produk obat alergi
+    'harga': 'Rp 9.000', // Harga obat per strip
+    'foto': 'assets/images/cetirizine.webp', // Path file gambar produk
+    'kategori': 'Bebas', // Kategori obat (dijual bebas tanpa resep)
   },
   {
-    'judul': 'Enervon C Multivitamin',
-    'harga': 'Rp 35.000',
-    'foto': 'assets/images/enervon_c.webp',
-    'kategori': 'Vitamin',
+    'judul': 'Enervon C Multivitamin', // Nama produk suplemen multivitamin harian
+    'harga': 'Rp 35.000', // Harga obat per botol
+    'foto': 'assets/images/enervon_c.webp', // Path file gambar produk
+    'kategori': 'Vitamin', // Kategori suplemen multivitamin
   },
   {
-    'judul': 'Ibuprofen 400mg',
-    'harga': 'Rp 11.500',
-    'foto': 'assets/images/ibuprofen.webp',
-    'kategori': 'Pereda Nyeri',
+    'judul': 'Ibuprofen 400mg', // Nama produk obat pereda nyeri/demam
+    'harga': 'Rp 11.500', // Harga obat per strip
+    'foto': 'assets/images/ibuprofen.webp', // Path file gambar produk
+    'kategori': 'Pereda Nyeri', // Kategori obat pereda nyeri
   },
   {
-    'judul': 'Paracetamol 500mg',
-    'harga': 'Rp 8.000',
-    'foto': 'assets/images/paracetamol.webp',
-    'kategori': 'Pereda Nyeri',
+    'judul': 'Paracetamol 500mg', // Nama produk obat sakit kepala/demam umum
+    'harga': 'Rp 8.000', // Harga obat per strip
+    'foto': 'assets/images/paracetamol.webp', // Path file gambar produk
+    'kategori': 'Pereda Nyeri', // Kategori obat pereda nyeri
   },
   {
-    'judul': 'Salbutamol Inhaler 100mcg',
-    'harga': 'Rp 65.000',
-    'foto': 'assets/images/salbutamol.webp',
-    'kategori': 'Resep',
+    'judul': 'Salbutamol Inhaler 100mcg', // Nama produk alat inhalasi asma
+    'harga': 'Rp 65.000', // Harga produk per inhaler
+    'foto': 'assets/images/salbutamol.webp', // Path file gambar produk
+    'kategori': 'Resep', // Kategori obat (butuh resep dokter)
   },
   {
-    'judul': 'Sangobion Kapsul',
-    'harga': 'Rp 18.000',
-    'foto': 'assets/images/sangobion.webp',
-    'kategori': 'Vitamin',
+    'judul': 'Sangobion Kapsul', // Nama produk suplemen penambah darah/zat besi
+    'harga': 'Rp 18.000', // Harga obat per strip
+    'foto': 'assets/images/sangobion.webp', // Path file gambar produk
+    'kategori': 'Vitamin', // Kategori suplemen multivitamin
   },
   {
-    'judul': 'Tolak Angin Cair',
-    'harga': 'Rp 24.500',
-    'foto': 'assets/images/tolak_angin.webp',
-    'kategori': 'Herbal',
+    'judul': 'Tolak Angin Cair', // Nama produk obat herbal masuk angin cair
+    'harga': 'Rp 24.500', // Harga obat per box isi 5
+    'foto': 'assets/images/tolak_angin.webp', // Path file gambar produk
+    'kategori': 'Herbal', // Kategori obat tradisional/herbal
   },
 ];
