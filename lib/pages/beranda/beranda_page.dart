@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/cart_provider.dart';
 import '../cart/cart_page.dart';
+import '../pesan/pesan_page.dart';
 import './search_field.dart';
 import './obat_list.dart';
 import './obat_card.dart';
@@ -38,6 +39,10 @@ class _BerandaPageState extends State<BerandaPage> {
         centerTitle: false, // Menyejajarkan teks judul ke sebelah kiri (ala modern)
         title: const Text('Pharmacare', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20)), // Judul aplikasi
         actions: [
+          IconButton(
+            icon: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.white, size: 23), // Ikon tombol menu pesan di sebelah keranjang
+            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const PesanPage())), // Buka halaman obrolan pesan & konsultasi
+          ),
           Consumer<CartProvider>(
             builder: (context, cartProvider, child) {
               return Padding(

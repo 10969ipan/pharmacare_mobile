@@ -51,7 +51,7 @@ class WelcomePage extends StatelessWidget {
                   fontSize: 34,
                   fontWeight: FontWeight.w900, // Teks super tebal modern
                   letterSpacing: 1.5,
-                  color: Color(0xFF1A5F7A), // Biru gelap berkelas
+                  color: Color(0xFF1E88E5), // Biru primer yang sinkron dengan tombol
                 ),
               ),
               const SizedBox(height: 16), // Jarak pemisah
