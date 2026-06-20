@@ -61,16 +61,19 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch, // Konten memenuhi lebar layar
           children: [
-            const SizedBox(height: 10), // Jarak atas
-            Image.asset(
-              'assets/images/dokter1.webp', // Ilustrasi dokter registrasi
-              height: 180, fit: BoxFit.contain, // Tinggi ilustrasi
-              errorBuilder: (_, _, _) => Container(
-                height: 150, decoration: BoxDecoration(color: Colors.green[50], borderRadius: BorderRadius.circular(16)), // Kontainer fallback jika aset tidak ditemukan
-                child: const Icon(Icons.person_add_alt_1_rounded, size: 70, color: Colors.green), // Ikon fallback pendaftaran
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 40.0), // Jarak spasi vertikal teks logo
+              child: RichText(
+                textAlign: TextAlign.center, // Ratakan teks di tengah
+                text: const TextSpan(
+                  style: TextStyle(fontSize: 38, fontWeight: FontWeight.bold, letterSpacing: 1.2), // Gaya teks dasar logo
+                  children: [
+                    TextSpan(text: 'Pharma', style: TextStyle(color: Color(0xFF1E88E5))), // Suku kata Pharma berwarna biru
+                    TextSpan(text: 'care', style: TextStyle(color: Colors.green)), // Suku kata care berwarna hijau
+                  ],
+                ),
               ),
             ),
-            const SizedBox(height: 24), // Spasi pemisah
             const Text('Buat Akun Baru', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF2C3E50)), textAlign: TextAlign.center), // Judul teks form
             const SizedBox(height: 8), // Spasi pemisah
             Text('Lengkapi data diri Anda untuk memulai perjalanan sehat', style: TextStyle(fontSize: 13, color: Colors.grey[600]), textAlign: TextAlign.center), // Penjelasan subform

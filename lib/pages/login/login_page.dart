@@ -66,16 +66,19 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch, // Konten kolom memenuhi lebar layar
           children: [
-            const SizedBox(height: 20), // Spasi atas halaman
-            Image.asset(
-              'assets/images/dokter.webp', // Ilustrasi gambar dokter di login
-              height: 200, fit: BoxFit.contain, // Batasan dimensi gambar
-              errorBuilder: (_, _, _) => Container(
-                height: 180, decoration: BoxDecoration(color: Colors.blue[50], borderRadius: BorderRadius.circular(16)), // Fallback kontainer jika gambar tidak ditemukan
-                child: const Icon(Icons.lock_person_rounded, size: 80, color: Color(0xFF1E88E5)), // Ikon medis gembok
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 40.0), // Jarak spasi vertikal teks logo
+              child: RichText(
+                textAlign: TextAlign.center, // Ratakan teks di tengah
+                text: const TextSpan(
+                  style: TextStyle(fontSize: 38, fontWeight: FontWeight.bold, letterSpacing: 1.2), // Gaya teks dasar logo
+                  children: [
+                    TextSpan(text: 'Pharma', style: TextStyle(color: Color(0xFF1E88E5))), // Suku kata Pharma berwarna biru
+                    TextSpan(text: 'care', style: TextStyle(color: Colors.green)), // Suku kata care berwarna hijau
+                  ],
+                ),
               ),
             ),
-            const SizedBox(height: 32), // Spasi vertikal pemisah gambar
             const Text('Masuk ke Akun Anda', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF2C3E50)), textAlign: TextAlign.center), // Judul teks form login
             const SizedBox(height: 8), // Jarak spasi vertikal subjudul
             Text('Silakan login untuk menikmati semua layanan Pharmacare', style: TextStyle(fontSize: 13, color: Colors.grey[600]), textAlign: TextAlign.center), // Deskripsi bantuan subform
