@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/cart_provider.dart';
+import 'checkout_confirm_page.dart';
+
 
 // Halaman Keranjang Belanjaan Pengguna
 class CartPage extends StatelessWidget {
@@ -145,7 +147,7 @@ class CartPage extends StatelessWidget {
             ],
           ),
           ElevatedButton(
-            onPressed: () => _checkout(context, cartProvider), // Jalankan proses penyelesaian belanja
+            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const CheckoutConfirmPage())), // Navigasi ke halaman memilih pembayaran dan alamat
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.green, // Warna tombol checkout hijau sukses
               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12), // Ukuran tombol checkout
@@ -157,26 +159,4 @@ class CartPage extends StatelessWidget {
       ),
     ),
   );
-
-  // Menampilkan dialog pesan penyelesaian transaksi belanja
-  void _checkout(BuildContext context, CartProvider cartProvider) {
-    showDialog(
-      context: context, // Informasi konteks navigasi layar saat ini
-      builder: (BuildContext context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)), // Sudut melengkung dialog 16px
-        title: const Text('Checkout Berhasil'), // Judul dialog notifikasi
-        content: const Text('Terima kasih! Pesanan obat Anda telah diterima dan sedang diproses.'), // Isi deskripsi notifikasi
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context); // Menutup jendela dialog pop-up
-              cartProvider.checkoutCart(); // Melakukan konfirmasi pemesanan dan kosongkan keranjang
-              Navigator.pop(context); // Kembali ke halaman Beranda utama
-            },
-            child: const Text('Selesai', style: TextStyle(fontWeight: FontWeight.bold)), // Tombol aksi penutup dialog
-          ),
-        ],
-      ),
-    );
-  }
 }
