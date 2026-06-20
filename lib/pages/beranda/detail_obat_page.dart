@@ -131,7 +131,7 @@ class DetailObatPage extends StatelessWidget {
           color: Colors.white, // Latar belakang bar putih
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05), // Bayangan halus pembatas
+              color: Colors.black.withValues(alpha: 0.05), // Bayangan halus pembatas
               blurRadius: 10, // Efek sebaran blur bayangan
               offset: const Offset(0, -4), // Arah bayangan ke atas
             ),

@@ -79,7 +79,7 @@ class _BerandaPageState extends State<BerandaPage> {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [Colors.blue[700]!, Colors.blue[900]!], begin: Alignment.topLeft, end: Alignment.bottomRight), // Gradasi warna biru
                     borderRadius: BorderRadius.circular(14), // Sudut melengkung banner
-                    boxShadow: [BoxShadow(color: Colors.blue.withOpacity(0.2), blurRadius: 8, offset: const Offset(0, 4))], // Bayangan biru lembut
+                    boxShadow: [BoxShadow(color: Colors.blue.withValues(alpha: 0.2), blurRadius: 8, offset: const Offset(0, 4))], // Bayangan biru lembut
                   ),
                   child: Stack(
                     children: [
@@ -104,7 +104,7 @@ class _BerandaPageState extends State<BerandaPage> {
                       Positioned(
                         right: 20, // Jarak ikon dari kanan banner
                         top: 25, // Jarak ikon dari atas banner
-                        child: Icon(Icons.health_and_safety_rounded, size: 60, color: Colors.white.withOpacity(0.18)), // Ikon logo kesehatan samar
+                        child: Icon(Icons.health_and_safety_rounded, size: 60, color: Colors.white.withValues(alpha: 0.18)), // Ikon logo kesehatan samar
                       ),
                     ],
                   ),

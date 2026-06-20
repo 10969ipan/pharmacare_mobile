@@ -11,129 +11,105 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _emailController = TextEditingController(); // Controller untuk input field email
-  final _passwordController = TextEditingController(); // Controller untuk input field password
+  // Controller input field email dan password untuk menampung data input secara terpusat
+  final _email = TextEditingController(), _pass = TextEditingController();
 
   @override
   void dispose() {
-    _emailController.dispose(); // Menghapus controller email untuk cegah kebocoran memori
-    _passwordController.dispose(); // Menghapus controller password untuk cegah kebocoran memori
+    // Menghapus controller untuk mencegah kebocoran memori saat widget tidak digunakan lagi
+    for (var c in [_email, _pass]) {
+      c.dispose();
+    }
     super.dispose();
   }
 
-  // Fungsi memproses aksi masuk pengguna
+  // Fungsi memproses aksi masuk pengguna dan mengarahkan ke halaman utama
   void _handleLogin() {
     Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (context) => const MainPage()), // Berpindah ke Halaman Utama (MainPage)
-      (route) => false, // Menghapus seluruh riwayat rute sebelumnya agar user tidak bisa memencet back ke login
+      MaterialPageRoute(builder: (context) => const MainPage()), // Pindah ke MainPage
+      (route) => false, // Bersihkan tumpukan rute agar user tidak bisa back ke login
     );
-    
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Login Berhasil! Selamat Datang.'), // Notifikasi toast melayang sukses masuk
-        backgroundColor: Colors.blue, // Warna latar belakang notifikasi biru
-        behavior: SnackBarBehavior.floating, // Posisi mengambang di layar
-      ),
-    );
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Login Berhasil! Selamat Datang.'), // Toast notifikasi selamat datang
+      backgroundColor: Colors.blue, // Warna biru khas login sukses
+      behavior: SnackBarBehavior.floating, // Desain toast melayang
+    ));
   }
 
+  // Helper widget pembuat field input terstandar untuk mengurangi repetisi kode
+  Widget _field(TextEditingController c, String lbl, String hint, IconData icon, {bool obscure = false, TextInputType type = TextInputType.text}) => TextField(
+    controller: c, // Hubungkan ke controller masukan
+    obscureText: obscure, // Sembunyikan karakter jika bernilai true
+    keyboardType: type, // Format tipe keyboard masukan
+    decoration: InputDecoration(
+      labelText: lbl, // Judul kolom input
+      hintText: hint, // Placeholder petunjuk input
+      prefixIcon: Icon(icon, color: const Color(0xFF1E88E5)), // Ikon pemanis biru di sisi kiri
+      filled: true, fillColor: Colors.grey[50], // Latar belakang abu-abu terang
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey[300]!)), // Sudut bulat melengkung border
+      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey[300]!)), // Border saat kolom tidak aktif
+      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0xFF1E88E5), width: 2)), // Border biru saat aktif terpilih
+    ),
+  );
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white, // Latar belakang halaman putih bersih
-      appBar: AppBar(
-        title: const Text('Login', style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold)), // Judul halaman
-        backgroundColor: Colors.white, // Latar belakang AppBar putih
-        elevation: 0, // Hilangkan bayangan di bawah AppBar
-        iconTheme: const IconThemeData(color: Colors.black87), // Tombol back berwarna gelap
-        centerTitle: true, // Judul dipusatkan di tengah
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0), // Padding sisi kiri-kanan halaman
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch, // Meluaskan isi kolom menyamping penuh
-            children: [
-              const SizedBox(height: 20), // Spasi atas
-              // Gambar Ilustrasi Dokter
-              Image.asset(
-                'assets/images/dokter.webp', // Aset ilustrasi gambar dokter
-                height: 200, fit: BoxFit.contain, // Batasan tinggi dan pemotongan gambar proporsional
-                errorBuilder: (context, error, stackTrace) => Container(
-                  height: 180,
-                  decoration: BoxDecoration(color: Colors.blue[50], borderRadius: BorderRadius.circular(16)), // Kontainer biru muda bulat jika gambar error
-                  child: const Icon(Icons.lock_person_rounded, size: 80, color: Color(0xFF1E88E5)), // Ikon gembok medis
+  Widget build(BuildContext context) => Scaffold(
+    backgroundColor: Colors.white, // Latar belakang halaman putih bersih
+    appBar: AppBar(
+      title: const Text('Login', style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold)), // Teks judul AppBar
+      backgroundColor: Colors.white, elevation: 0, centerTitle: true, // Flat design AppBar di tengah
+      iconTheme: const IconThemeData(color: Colors.black87), // Warna ikon back hitam pekat
+    ),
+    body: SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0), // Padding di tepi layar kiri dan kanan
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch, // Konten kolom memenuhi lebar layar
+          children: [
+            const SizedBox(height: 20), // Spasi atas halaman
+            Image.asset(
+              'assets/images/dokter.webp', // Ilustrasi gambar dokter di login
+              height: 200, fit: BoxFit.contain, // Batasan dimensi gambar
+              errorBuilder: (_, _, _) => Container(
+                height: 180, decoration: BoxDecoration(color: Colors.blue[50], borderRadius: BorderRadius.circular(16)), // Fallback kontainer jika gambar tidak ditemukan
+                child: const Icon(Icons.lock_person_rounded, size: 80, color: Color(0xFF1E88E5)), // Ikon medis gembok
+              ),
+            ),
+            const SizedBox(height: 32), // Spasi vertikal pemisah gambar
+            const Text('Masuk ke Akun Anda', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF2C3E50)), textAlign: TextAlign.center), // Judul teks form login
+            const SizedBox(height: 8), // Jarak spasi vertikal subjudul
+            Text('Silakan login untuk menikmati semua layanan Pharmacare', style: TextStyle(fontSize: 13, color: Colors.grey[600]), textAlign: TextAlign.center), // Deskripsi bantuan subform
+            const SizedBox(height: 32), // Jarak sebelum input fields
+            _field(_email, "Email", "Contoh: user@email.com", Icons.email_outlined, type: TextInputType.emailAddress), // Kolom input email
+            const SizedBox(height: 16), // Spasi antar kolom input
+            _field(_pass, "Password", "Masukkan password Anda", Icons.lock_outline, obscure: true), // Kolom input password
+            const SizedBox(height: 32), // Jarak sebelum tombol submit masuk
+            SizedBox(
+              height: 50, // Tinggi tetap tombol masuk
+              child: ElevatedButton(
+                onPressed: _handleLogin, // Aksi handle masuk aplikasi
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue[900], // Latar belakang tombol biru tua
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), elevation: 0, // Sudut tombol bulat 12px tanpa bayangan
                 ),
+                child: const Text("Masuk", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)), // Teks tombol label masuk
               ),
-              const SizedBox(height: 32), // Jarak di bawah gambar
-              const Text('Masuk ke Akun Anda', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF2C3E50)), textAlign: TextAlign.center), // Teks judul form
-              const SizedBox(height: 8), // Jarak spasi teks
-              Text('Silakan login untuk menikmati semua layanan Pharmacare', style: TextStyle(fontSize: 13, color: Colors.grey[600]), textAlign: TextAlign.center), // Deskripsi bantuan login
-              const SizedBox(height: 32), // Jarak sebelum input fields
-              
-              // Kolom Input Email
-              TextField(
-                controller: _emailController, // Hubungkan ke controller email
-                keyboardType: TextInputType.emailAddress, // Keyboard dengan format email khusus (@ dan .com)
-                decoration: InputDecoration(
-                  labelText: "Email", // Label nama input
-                  hintText: "Contoh: user@email.com", // Contoh input teks bantu
-                  prefixIcon: const Icon(Icons.email_outlined, color: Color(0xFF1E88E5)), // Ikon surat di kiri kolom
-                  filled: true, fillColor: Colors.grey[50], // Latar belakang abu-abu sangat terang
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey[300]!)), // Desain border melengkung
-                  enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey[300]!)), // Desain border saat tidak aktif
-                  focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0xFF1E88E5), width: 2)), // Desain border saat aktif terpilih
+            ),
+            const SizedBox(height: 24), // Jarak di bawah tombol
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center, // Pusatkan isi baris navigasi
+              children: [
+                Text("Belum memiliki akun? ", style: TextStyle(color: Colors.grey[600], fontSize: 13)), // Info teks penjelas
+                GestureDetector(
+                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterPage())), // Buka RegisterPage jika di-tap
+                  child: const Text("Daftar Sekarang", style: TextStyle(color: Color(0xFF1E88E5), fontWeight: FontWeight.bold, fontSize: 13)), // Tautan daftar akun baru
                 ),
-              ),
-              const SizedBox(height: 16), // Jarak antar input field
-              
-              // Kolom Input Password
-              TextField(
-                controller: _passwordController, // Hubungkan ke controller password
-                obscureText: true, // Menyembunyikan inputan teks menjadi lingkaran rahasia
-                decoration: InputDecoration(
-                  labelText: "Password", // Label nama input
-                  hintText: "Masukkan password Anda", // Contoh input teks bantu
-                  prefixIcon: const Icon(Icons.lock_outline, color: Color(0xFF1E88E5)), // Ikon gembok rahasia di kiri kolom
-                  filled: true, fillColor: Colors.grey[50], // Latar belakang abu-abu terang
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey[300]!)), // Desain border melengkung
-                  enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.grey[300]!)), // Desain border saat tidak aktif
-                  focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0xFF1E88E5), width: 2)), // Desain border saat aktif terpilih
-                ),
-              ),
-              const SizedBox(height: 32), // Jarak sebelum tombol submit
-              
-              // Tombol Proses Masuk (Login)
-              SizedBox(
-                height: 50, // Tinggi tetap tombol submit
-                child: ElevatedButton(
-                  onPressed: _handleLogin, // Jalankan fungsi handle login ketika ditekan
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue[900], // Latar belakang tombol biru tua
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Sudut bulat tombol 12px
-                    elevation: 0, // Tanpa bayangan tombol
-                  ),
-                  child: const Text("Masuk", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)), // Label tombol
-                ),
-              ),
-              const SizedBox(height: 24), // Jarak di bawah tombol submit
-              
-              // Baris Navigasi Dialihkan ke Pendaftaran
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center, // Pusatkan isi baris navigasi
-                children: [
-                  Text("Belum memiliki akun? ", style: TextStyle(color: Colors.grey[600], fontSize: 13)), // Teks info
-                  GestureDetector(
-                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterPage())), // Buka halaman pendaftaran jika di-tap
-                    child: const Text("Daftar Sekarang", style: TextStyle(color: Color(0xFF1E88E5), fontWeight: FontWeight.bold, fontSize: 13)), // Teks link aksi
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20), // Spasi penutup di bawah halaman
-            ],
-          ),
+              ],
+            ),
+            const SizedBox(height: 20), // Spasi penutup bagian paling bawah
+          ],
         ),
       ),
-    );
-  }
+    ),
+  );
 }

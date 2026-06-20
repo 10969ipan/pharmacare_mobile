@@ -29,7 +29,6 @@ class OrderPage extends StatelessWidget {
             // Membagi riwayat transaksi berdasarkan status pemrosesan aktif/selesai
             final activeOrders = cartProvider.orders.where((order) => order['isCompleted'] == false).toList();
             final completedOrders = cartProvider.orders.where((order) => order['isCompleted'] == true).toList();
-
             return TabBarView(
               children: [
                 _buildOrdersList(context, activeOrders, 'Belum ada pesanan aktif.', Icons.hourglass_empty), // Tab daftar pesanan proses
