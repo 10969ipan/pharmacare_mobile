@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../welcome/welcome_page.dart';
+import './sub_profil_pages.dart'; // Import sub halaman profil
+
 
 // Halaman Profil Pengguna Modern & Minimalis
 class ProfilPage extends StatelessWidget {
@@ -163,7 +165,21 @@ class ProfilPage extends StatelessWidget {
                       ),
                       title: Text(item['title'] as String, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14, color: Color(0xFF2C3E50))), // Judul menu
                       trailing: const Icon(Icons.chevron_right, size: 18, color: Colors.grey), // Petunjuk arah navigasi
-                      onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Membuka halaman ${item['title']}'))), // Notifikasi toast uji coba
+                      onTap: () {
+                        // Menentukan sub halaman target berdasarkan nama menu
+                        Widget target;
+                        if (item['title'] == 'Ubah Profil') {
+                          target = const EditProfilPage();
+                        } else if (item['title'] == 'Alamat Pengiriman') {
+                          target = const AlamatPage();
+                        } else if (item['title'] == 'Metode Pembayaran') {
+                          target = const MetodePembayaranPage();
+                        } else {
+                          target = const PusatBantuanPage();
+                        }
+                        // Berpindah rute ke halaman sub menu terpilih
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => target));
+                      },
                     ),
                     if (!isLast) const Divider(height: 1, indent: 56, endIndent: 16), // Garis pembatas horizontal tipis (indentasi ikon)
                   ],
