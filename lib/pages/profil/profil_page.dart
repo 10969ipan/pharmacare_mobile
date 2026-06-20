@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../welcome/welcome_page.dart';
-import './sub_profil_pages.dart'; // Import sub halaman profil
+import './edit_profil_page.dart';
+import './alamat_page.dart';
+import './metode_pembayaran_page.dart';
+import './pusat_bantuan_page.dart';
 
 
 // Halaman Profil Pengguna Modern & Minimalis
