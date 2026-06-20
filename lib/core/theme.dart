@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const Color primaryColor = Color(0xFF00796B); // Teal representing health/pharmacy
-  static const Color secondaryColor = Color(0xFF4DB6AC);
-  static const Color backgroundColor = Color(0xFFF5F5F5);
+  static const Color primaryColor = Color(0xFF1E88E5); // Blue
+  static const Color secondaryColor = Color(0xFF64B5F6); // Light Blue
+  static const Color backgroundColor = Color(0xFFFFFFFF); // White
   static const Color textPrimaryColor = Color(0xFF212121);
   static const Color textSecondaryColor = Color(0xFF757575);
 
