@@ -6,82 +6,79 @@ import './metode_pembayaran_page.dart';
 import './pusat_bantuan_page.dart';
 
 
-// Halaman Profil Pengguna Modern & Minimalis
 class ProfilPage extends StatelessWidget {
   const ProfilPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAFAFA), // Latar belakang abu-abu sangat terang
+      backgroundColor: const Color(0xFFFAFAFA),
       appBar: AppBar(
-        backgroundColor: Colors.blue[900], // AppBar biru tua
-        title: const Text('Profil Saya', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20)), // Judul halaman
-        centerTitle: true, // Pusatkan judul
-        elevation: 0, // Tanpa bayangan bawah AppBar
+        backgroundColor: Colors.blue[900],
+        title: const Text('Profil Saya', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20)),
+        centerTitle: true,
+        elevation: 0,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 24), // Jarak spasi atas
-            _buildProfileHeader(context), // Render informasi akun pengguna
-            const SizedBox(height: 24), // Spasi pemisah
-            _buildStatsSection(), // Render stats poin/voucher (hi-fi design)
-            const SizedBox(height: 24), // Spasi pemisah
-            _buildProfileMenu(context), // Render barisan menu pengaturan
-            const SizedBox(height: 32), // Spasi penutup bawah
+            const SizedBox(height: 24),
+            _buildProfileHeader(context),
+            const SizedBox(height: 24),
+            _buildStatsSection(),
+            const SizedBox(height: 24),
+            _buildProfileMenu(context),
+            const SizedBox(height: 32),
           ],
         ),
       ),
     );
   }
 
-  // Membuat visual informasi diri pengguna (Avatar, nama, email, hp)
   Widget _buildProfileHeader(BuildContext context) {
     return Center(
       child: Column(
         children: [
-          // Kontainer foto profil berbayang halus
           Container(
             decoration: BoxDecoration(
-              shape: BoxShape.circle, // Bentuk bulat penuh
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 12, offset: const Offset(0, 6))], // Efek bayangan bulat
+              shape: BoxShape.circle,
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 12, offset: const Offset(0, 6))],
             ),
             child: CircleAvatar(
-              radius: 54, // Ukuran radius lingkaran
-              backgroundColor: Colors.white, // Lingkaran tepi putih
+              radius: 54,
+              backgroundColor: Colors.white,
               child: CircleAvatar(
-                radius: 50, // Radius avatar dalam
-                backgroundImage: const AssetImage('assets/images/dokter.webp'), // Gambar utama
-                backgroundColor: Colors.blue[50], // Latar warna cadangan
+                radius: 50,
+                backgroundImage: const AssetImage('assets/images/dokter.webp'),
+                backgroundColor: Colors.blue[50],
                 child: ClipOval(
                   child: Image.asset(
-                    'assets/images/dokter.webp', // Memuat berkas gambar
-                    fit: BoxFit.cover, width: 100, height: 100, // Menyesuaikan lebar
-                    errorBuilder: (context, error, stackTrace) => Icon(Icons.account_circle, size: 90, color: Colors.blue[900]), // Ikon cadangan jika error
+                    'assets/images/dokter.webp',
+                    fit: BoxFit.cover, width: 100, height: 100,
+                    errorBuilder: (context, error, stackTrace) => Icon(Icons.account_circle, size: 90, color: Colors.blue[900]),
                   ),
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 16), // Spasi di bawah avatar
-          const Text('Irfan Arfian Kusnadi', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF2C3E50))), // Teks nama tebal
-          const SizedBox(height: 6), // Spasi vertikal kecil
+          const SizedBox(height: 16),
+          const Text('Irfan Arfian Kusnadi', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF2C3E50))),
+          const SizedBox(height: 6),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center, // Pusatkan info baris
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.email_outlined, size: 14, color: Colors.grey[500]), // Ikon email kecil
-              const SizedBox(width: 6), // Jarak spasi horizontal
-              Text('irfan.kusnadi@email.com', style: TextStyle(fontSize: 13, color: Colors.grey[600])), // Teks email
+              Icon(Icons.email_outlined, size: 14, color: Colors.grey[500]),
+              const SizedBox(width: 6),
+              Text('irfan.kusnadi@email.com', style: TextStyle(fontSize: 13, color: Colors.grey[600])),
             ],
           ),
-          const SizedBox(height: 4), // Spasi vertikal kecil
+          const SizedBox(height: 4),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center, // Pusatkan info baris
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.phone_android_outlined, size: 14, color: Colors.grey[500]), // Ikon HP kecil
-              const SizedBox(width: 6), // Jarak spasi horizontal
-              Text('+62 812-3456-7890', style: TextStyle(fontSize: 13, color: Colors.grey[600])), // Teks nomor hp
+              Icon(Icons.phone_android_outlined, size: 14, color: Colors.grey[500]),
+              const SizedBox(width: 6),
+              Text('+62 812-3456-7890', style: TextStyle(fontSize: 13, color: Colors.grey[600])),
             ],
           ),
         ],
@@ -89,54 +86,49 @@ class ProfilPage extends StatelessWidget {
     );
   }
 
-  // Membuat visualisasi ringkasan poin, voucher, dan transaksi aktif
   Widget _buildStatsSection() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0), // Jarak margin dari layar
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16), // Padding dalam kontainer stats
+        padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
-          color: Colors.white, // Warna latar kontainer putih
-          borderRadius: BorderRadius.circular(16), // Sudut bulat kontainer
-          border: Border.all(color: const Color(0xFFEEEEEE)), // Batas tepi abu-abu tipis
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: const Color(0xFFEEEEEE)),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Distribusi spasi merata
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildStatItem('150', 'Poin Sehat', Icons.stars_rounded, Colors.amber), // Item poin sehat
-            _buildDivider(), // Garis vertikal
-            _buildStatItem('3', 'Voucher', Icons.local_offer_rounded, Colors.green), // Item jumlah voucher
-            _buildDivider(), // Garis vertikal
-            _buildStatItem('2', 'Order Aktif', Icons.local_shipping_rounded, Colors.blue), // Item pesanan diproses
+            _buildStatItem('150', 'Poin Sehat', Icons.stars_rounded, Colors.amber),
+            _buildDivider(),
+            _buildStatItem('3', 'Voucher', Icons.local_offer_rounded, Colors.green),
+            _buildDivider(),
+            _buildStatItem('2', 'Order Aktif', Icons.local_shipping_rounded, Colors.blue),
           ],
         ),
       ),
     );
   }
 
-  // Membuat widget pembagi vertikal di area stats
   Widget _buildDivider() => Container(height: 30, width: 1, color: Colors.grey[200]);
 
-  // Membuat elemen statistik tunggal (Angka, judul, ikon pendukung)
   Widget _buildStatItem(String val, String label, IconData icon, Color color) {
     return Column(
       children: [
         Row(
           children: [
-            Icon(icon, size: 16, color: color), // Ikon kecil bertema
-            const SizedBox(width: 4), // Jarak spasi horizontal
-            Text(val, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF2C3E50))), // Angka stats
+            Icon(icon, size: 16, color: color),
+            const SizedBox(width: 4),
+            Text(val, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF2C3E50))),
           ],
         ),
-        const SizedBox(height: 4), // Jarak di bawah angka
-        Text(label, style: const TextStyle(fontSize: 11, color: Colors.grey, fontWeight: FontWeight.w500)), // Judul statistik
+        const SizedBox(height: 4),
+        Text(label, style: const TextStyle(fontSize: 11, color: Colors.grey, fontWeight: FontWeight.w500)),
       ],
     );
   }
 
-  // Membangun daftar menu pengaturan akun pengguna
   Widget _buildProfileMenu(BuildContext context) {
-    // Definisi list data menu profil
     final items = [
       {'icon': Icons.edit, 'title': 'Ubah Profil', 'color': Colors.blue[50], 'iconColor': Colors.blue[700]},
       {'icon': Icons.location_on, 'title': 'Alamat Pengiriman', 'color': Colors.green[50], 'iconColor': Colors.green[700]},
@@ -145,31 +137,29 @@ class ProfilPage extends StatelessWidget {
     ];
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0), // Jarak margin tepi layar
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
         children: [
-          // Kartu menu utama akun
           Container(
             decoration: BoxDecoration(
-              color: Colors.white, // Latar belakang kartu putih
-              borderRadius: BorderRadius.circular(16), // Sudut bulat kartu menu
-              border: Border.all(color: const Color(0xFFEEEEEE)), // Garis pembatas luar abu-abu
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: const Color(0xFFEEEEEE)),
             ),
             child: Column(
               children: items.map((item) {
-                final isLast = item == items.last; // Memeriksa baris terakhir list
+                final isLast = item == items.last;
                 return Column(
                   children: [
                     ListTile(
                       leading: Container(
-                        padding: const EdgeInsets.all(6), // Padding dalam wadah bulat ikon
-                        decoration: BoxDecoration(color: item['color'] as Color, shape: BoxShape.circle), // Latar bulat kecil berwarna lembut
-                        child: Icon(item['icon'] as IconData, color: item['iconColor'] as Color, size: 18), // Visual ikon berwarna senada
+                        padding: const EdgeInsets.all(6),
+                        decoration: BoxDecoration(color: item['color'] as Color, shape: BoxShape.circle),
+                        child: Icon(item['icon'] as IconData, color: item['iconColor'] as Color, size: 18),
                       ),
-                      title: Text(item['title'] as String, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14, color: Color(0xFF2C3E50))), // Judul menu
-                      trailing: const Icon(Icons.chevron_right, size: 18, color: Colors.grey), // Petunjuk arah navigasi
+                      title: Text(item['title'] as String, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14, color: Color(0xFF2C3E50))),
+                      trailing: const Icon(Icons.chevron_right, size: 18, color: Colors.grey),
                       onTap: () {
-                        // Menentukan sub halaman target berdasarkan nama menu
                         Widget target;
                         if (item['title'] == 'Ubah Profil') {
                           target = const EditProfilPage();
@@ -180,34 +170,32 @@ class ProfilPage extends StatelessWidget {
                         } else {
                           target = const PusatBantuanPage();
                         }
-                        // Berpindah rute ke halaman sub menu terpilih
                         Navigator.push(context, MaterialPageRoute(builder: (_) => target));
                       },
                     ),
-                    if (!isLast) const Divider(height: 1, indent: 56, endIndent: 16), // Garis pembatas horizontal tipis (indentasi ikon)
+                    if (!isLast) const Divider(height: 1, indent: 56, endIndent: 16),
                   ],
                 );
               }).toList(),
             ),
           ),
-          const SizedBox(height: 16), // Spasi pemisah vertikal
+          const SizedBox(height: 16),
           
-          // Kartu tombol Keluar (Logout)
           Container(
             decoration: BoxDecoration(
-              color: Colors.white, // Latar belakang kartu putih
-              borderRadius: BorderRadius.circular(16), // Sudut bulat kartu
-              border: Border.all(color: const Color(0xFFEEEEEE)), // Garis pembatas luar abu-abu
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: const Color(0xFFEEEEEE)),
             ),
             child: ListTile(
               leading: Container(
-                padding: const EdgeInsets.all(6), // Jarak di dalam bulat merah
-                decoration: const BoxDecoration(color: Color(0xFFFFEBEE), shape: BoxShape.circle), // Bulatan berwarna merah lembut
-                child: const Icon(Icons.logout, color: Color(0xFFC62828), size: 18), // Visual ikon logout merah
+                padding: const EdgeInsets.all(6),
+                decoration: const BoxDecoration(color: Color(0xFFFFEBEE), shape: BoxShape.circle),
+                child: const Icon(Icons.logout, color: Color(0xFFC62828), size: 18),
               ),
-              title: const Text('Keluar dari Aplikasi', style: TextStyle(color: Color(0xFFC62828), fontWeight: FontWeight.bold, fontSize: 14)), // Teks logout merah
-              trailing: const Icon(Icons.chevron_right, size: 18, color: Color(0xFFC62828)), // Panah kanan merah
-              onTap: () => _showLogoutDialog(context), // Jalankan konfirmasi keluar akun
+              title: const Text('Keluar dari Aplikasi', style: TextStyle(color: Color(0xFFC62828), fontWeight: FontWeight.bold, fontSize: 14)),
+              trailing: const Icon(Icons.chevron_right, size: 18, color: Color(0xFFC62828)),
+              onTap: () => _showLogoutDialog(context),
             ),
           ),
         ],
@@ -215,27 +203,26 @@ class ProfilPage extends StatelessWidget {
     );
   }
 
-  // Memunculkan kotak dialog konfirmasi log out/keluar aplikasi
   void _showLogoutDialog(BuildContext context) {
     showDialog(
-      context: context, // Informasi rute layar saat ini
+      context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)), // Sudut melengkung dialog 16px
-          title: const Text('Keluar dari Akun', style: TextStyle(fontWeight: FontWeight.bold)), // Judul kotak dialog
-          content: const Text('Apakah Anda yakin ingin keluar dari aplikasi Pharmacare?'), // Teks pertanyaan konfirmasi
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          title: const Text('Keluar dari Akun', style: TextStyle(fontWeight: FontWeight.bold)),
+          content: const Text('Apakah Anda yakin ingin keluar dari aplikasi Pharmacare?'),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Batal')), // Batalkan log out dan tutup dialog
+            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Batal')),
             TextButton(
               onPressed: () {
-                Navigator.pop(context); // Tutup dialog pop-up konfirmasi
+                Navigator.pop(context);
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => const WelcomePage()), // Navigasi ke halaman Welcome/Masuk awal
-                  (route) => false, // Bersihkan seluruh riwayat tumpukan navigasi sebelumnya
+                  MaterialPageRoute(builder: (context) => const WelcomePage()),
+                  (route) => false,
                 );
               },
-              child: const Text('Keluar', style: TextStyle(color: Color(0xFFC62828), fontWeight: FontWeight.bold)), // Tombol eksekusi keluar akun merah
+              child: const Text('Keluar', style: TextStyle(color: Color(0xFFC62828), fontWeight: FontWeight.bold)),
             ),
           ],
         );

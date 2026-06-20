@@ -4,7 +4,6 @@ import '../../providers/cart_provider.dart';
 import 'checkout_confirm_page.dart';
 
 
-// Halaman Keranjang Belanjaan Pengguna
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
@@ -12,100 +11,98 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue[900], // Latar belakang AppBar biru tua
-        title: const Text('Keranjang Belanja', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)), // Judul halaman
-        iconTheme: const IconThemeData(color: Colors.white), // Tombol back berwarna putih
+        backgroundColor: Colors.blue[900],
+        title: const Text('Keranjang Belanja', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Consumer<CartProvider>(
         builder: (context, cartProvider, child) => cartProvider.items.isEmpty 
-            ? _buildEmptyCart(context) // Menampilkan halaman kosong jika tidak ada item belanjaan
-            : _buildCartList(context, cartProvider), // Menampilkan daftar item belanjaan
+            ? _buildEmptyCart(context)
+            : _buildCartList(context, cartProvider),
       ),
       bottomNavigationBar: Consumer<CartProvider>(
         builder: (context, cartProvider, child) => cartProvider.items.isEmpty 
-            ? const SizedBox.shrink() // Bottom bar hanya tampil jika keranjang belanja berisi item
-            : _buildCheckoutBar(context, cartProvider), // Bar aksi checkout total belanjaan
+            ? const SizedBox.shrink()
+            : _buildCheckoutBar(context, cartProvider),
       ),
     );
   }
 
-  // Tampilan halaman ketika keranjang belanja masih kosong
   Widget _buildEmptyCart(BuildContext context) => Center(
     child: Padding(
-      padding: const EdgeInsets.all(24.0), // Padding wadah pesan kosong
+      padding: const EdgeInsets.all(24.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center, // Pusatkan konten secara vertikal
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.shopping_cart_outlined, size: 100, color: Colors.blue[200]), // Ikon keranjang kosong
-          const SizedBox(height: 24), // Spasi pemisah vertikal
-          const Text('Keranjang Anda Kosong', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)), // Pesan utama kosong
-          const SizedBox(height: 8), // Spasi pemisah vertikal
-          Text('Silakan pilih obat kebutuhan Anda di halaman Beranda.', style: TextStyle(fontSize: 16, color: Colors.grey[600]), textAlign: TextAlign.center), // Petunjuk belanja
-          const SizedBox(height: 32), // Spasi pemisah vertikal
+          Icon(Icons.shopping_cart_outlined, size: 100, color: Colors.blue[200]),
+          const SizedBox(height: 24),
+          const Text('Keranjang Anda Kosong', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 8),
+          Text('Silakan pilih obat kebutuhan Anda di halaman Beranda.', style: TextStyle(fontSize: 16, color: Colors.grey[600]), textAlign: TextAlign.center),
+          const SizedBox(height: 32),
           ElevatedButton(
-            onPressed: () => Navigator.pop(context), // Kembali ke beranda
+            onPressed: () => Navigator.pop(context),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue[900], // Latar belakang tombol biru tua
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12), // Ukuran padding tombol
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)), // Sudut bulat tombol
+              backgroundColor: Colors.blue[900],
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             ),
-            child: const Text('Mulai Belanja', style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)), // Teks tombol belanja
+            child: const Text('Mulai Belanja', style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)),
           ),
         ],
       ),
     ),
   );
 
-  // Membangun daftar item obat yang dimasukkan ke keranjang belanja
   Widget _buildCartList(BuildContext context, CartProvider cartProvider) => ListView.builder(
-    padding: const EdgeInsets.all(12.0), // Padding di luar daftar item
-    itemCount: cartProvider.items.length, // Total jumlah jenis obat di keranjang
+    padding: const EdgeInsets.all(12.0),
+    itemCount: cartProvider.items.length,
     itemBuilder: (context, index) {
-      final item = cartProvider.items[index]; // Data item obat saat ini
+      final item = cartProvider.items[index];
       return Card(
-        elevation: 2, // Efek bayangan kartu item
-        margin: const EdgeInsets.only(bottom: 12.0), // Jarak antar kartu item
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Sudut melengkung kartu
+        elevation: 2,
+        margin: const EdgeInsets.only(bottom: 12.0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Padding(
-          padding: const EdgeInsets.all(12.0), // Padding isi di dalam kartu
+          padding: const EdgeInsets.all(12.0),
           child: Row(
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(8.0), // Sudut bulat gambar obat
+                borderRadius: BorderRadius.circular(8.0),
                 child: Image.asset(
-                  item.foto, // Lokasi gambar aset obat
-                  width: 70, height: 70, fit: BoxFit.cover, // Dimensi & pemotongan gambar
+                  item.foto,
+                  width: 70, height: 70, fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) => Container(
-                    width: 70, height: 70, color: Colors.blue[50], // Latar cadangan biru muda
-                    child: const Icon(Icons.medication, size: 35, color: Colors.blue), // Ikon cadangan obat
+                    width: 70, height: 70, color: Colors.blue[50],
+                    child: const Icon(Icons.medication, size: 35, color: Colors.blue),
                   ),
                 ),
               ),
-              const SizedBox(width: 12), // Spasi horizontal
+              const SizedBox(width: 12),
               Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start, // Rata kiri informasi teks obat
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(item.judul, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16), maxLines: 1, overflow: TextOverflow.ellipsis), // Nama obat
-                    const SizedBox(height: 4), // Spasi pemisah vertikal
-                    Text(item.harga, style: const TextStyle(color: Colors.green, fontWeight: FontWeight.w600, fontSize: 14)), // Harga satuan obat
-                    const SizedBox(height: 8), // Spasi pemisah vertikal
+                    Text(item.judul, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16), maxLines: 1, overflow: TextOverflow.ellipsis),
+                    const SizedBox(height: 4),
+                    Text(item.harga, style: const TextStyle(color: Colors.green, fontWeight: FontWeight.w600, fontSize: 14)),
+                    const SizedBox(height: 8),
                     Row(
                       children: [
-                        _buildQuantityButton(icon: Icons.remove, onPressed: () => cartProvider.decrementQuantity(item.judul)), // Tombol minus kuantitas
+                        _buildQuantityButton(icon: Icons.remove, onPressed: () => cartProvider.decrementQuantity(item.judul)),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0), // Jarak kiri-kanan angka kuantitas
-                          child: Text('${item.quantity}', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)), // Jumlah kuantitas obat
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Text('${item.quantity}', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                         ),
-                        _buildQuantityButton(icon: Icons.add, onPressed: () => cartProvider.incrementQuantity(item.judul)), // Tombol plus kuantitas
+                        _buildQuantityButton(icon: Icons.add, onPressed: () => cartProvider.incrementQuantity(item.judul)),
                       ],
                     ),
                   ],
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.delete_outline, color: Colors.red), // Tombol ikon hapus item obat
-                onPressed: () => cartProvider.removeItem(item.judul), // Hapus item tersebut dari keranjang
+                icon: const Icon(Icons.delete_outline, color: Colors.red),
+                onPressed: () => cartProvider.removeItem(item.judul),
               ),
             ],
           ),
@@ -114,46 +111,44 @@ class CartPage extends StatelessWidget {
     },
   );
 
-  // Membuat tombol pengubah kuantitas bulat kecil (+ atau -)
   Widget _buildQuantityButton({required IconData icon, required VoidCallback onPressed}) => Container(
-    width: 32, height: 32, // Dimensi bulat
-    decoration: BoxDecoration(color: Colors.blue[50], shape: BoxShape.circle), // Latar bulat biru muda
+    width: 32, height: 32,
+    decoration: BoxDecoration(color: Colors.blue[50], shape: BoxShape.circle),
     child: IconButton(
-      padding: EdgeInsets.zero, // Hilangkan padding internal default
-      iconSize: 18, // Ukuran ikon kecil
-      icon: Icon(icon, color: Colors.blue[900]), // Visual ikon plus/minus
-      onPressed: onPressed, // Jalankan fungsi pengurang/penambah
+      padding: EdgeInsets.zero,
+      iconSize: 18,
+      icon: Icon(icon, color: Colors.blue[900]),
+      onPressed: onPressed,
     ),
   );
 
-  // Baris informasi total tagihan dan tombol penyelesaian belanja di bawah
   Widget _buildCheckoutBar(BuildContext context, CartProvider cartProvider) => Container(
-    padding: const EdgeInsets.all(16.0), // Padding di dalam bar checkout
+    padding: const EdgeInsets.all(16.0),
     decoration: BoxDecoration(
-      color: Colors.white, // Latar belakang putih bar
-      boxShadow: [BoxShadow(color: Colors.grey.withValues(alpha: 0.2), spreadRadius: 1, blurRadius: 5, offset: const Offset(0, -2))], // Bayangan ke arah atas
+      color: Colors.white,
+      boxShadow: [BoxShadow(color: Colors.grey.withValues(alpha: 0.2), spreadRadius: 1, blurRadius: 5, offset: const Offset(0, -2))],
     ),
     child: SafeArea(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween, // Sejajarkan teks kiri dan tombol checkout kanan
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
-            mainAxisSize: MainAxisSize.min, // Tinggi menyesuaikan konten
-            crossAxisAlignment: CrossAxisAlignment.start, // Rata kiri teks info harga
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Total Tagihan', style: TextStyle(color: Colors.grey, fontSize: 14)), // Teks label info harga
-              const SizedBox(height: 4), // Jarak pemisah vertikal
-              Text(cartProvider.totalPriceFormatted, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blue[900])), // Angka total rupiah terformat
+              const Text('Total Tagihan', style: TextStyle(color: Colors.grey, fontSize: 14)),
+              const SizedBox(height: 4),
+              Text(cartProvider.totalPriceFormatted, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blue[900])),
             ],
           ),
           ElevatedButton(
-            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const CheckoutConfirmPage())), // Navigasi ke halaman memilih pembayaran dan alamat
+            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const CheckoutConfirmPage())),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green, // Warna tombol checkout hijau sukses
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12), // Ukuran tombol checkout
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)), // Sudut bulat tombol
+              backgroundColor: Colors.green,
+              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             ),
-            child: const Text('Checkout', style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)), // Label tombol
+            child: const Text('Checkout', style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)),
           ),
         ],
       ),

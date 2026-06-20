@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import '../login/login_page.dart';
 import '../registrasi/registrasi_page.dart';
 
-// Halaman Pembuka/Selamat Datang (Welcome Screen) Aplikasi
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
     body: Container(
-      // Gradasi latar belakang yang sangat halus dan premium untuk kesan modern
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [Colors.white, Color(0xFFF2F7FD)],
@@ -19,44 +17,41 @@ class WelcomePage extends StatelessWidget {
       ),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0), // Padding yang lebih longgar
+          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch, // Meluaskan isi secara horizontal penuh
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Spacer(flex: 2), // Pendorong atas dengan flex lebih tinggi
+              const Spacer(flex: 2),
               
-              // Ikon medis minimalis melayang untuk memperkuat tema aplikasi
               Center(
                 child: Container(
                   height: 90,
                   width: 90,
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1E88E5).withValues(alpha: 0.1), // Lingkaran biru transparan halus
+                    color: const Color(0xFF1E88E5).withValues(alpha: 0.1),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
                     Icons.health_and_safety_outlined,
                     size: 48,
-                    color: Color(0xFF1E88E5), // Ikon kesehatan biru primer
+                    color: Color(0xFF1E88E5),
                   ),
                 ),
               ),
-              const SizedBox(height: 24), // Jarak di bawah ikon
+              const SizedBox(height: 24),
               
-              // Brand Logo Teks Minimalis
               const Text(
                 'Pharmacare',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 34,
-                  fontWeight: FontWeight.w900, // Teks super tebal modern
+                  fontWeight: FontWeight.w900,
                   letterSpacing: 1.5,
-                  color: Color(0xFF1E88E5), // Biru primer yang sinkron dengan tombol
+                  color: Color(0xFF1E88E5),
                 ),
               ),
-              const SizedBox(height: 16), // Jarak pemisah
+              const SizedBox(height: 16),
               
-              // Teks Sapaan Utama
               const Text(
                 "Selamat Datang",
                 style: TextStyle(
@@ -66,9 +61,8 @@ class WelcomePage extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 10), // Jarak subjudul
+              const SizedBox(height: 10),
               
-              // Subjudul Deskripsi Aplikasi yang bersih dan rapi
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
@@ -76,45 +70,43 @@ class WelcomePage extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 13,
                     color: Colors.grey[600],
-                    height: 1.6, // Spasi baris tinggi ala desain modern
+                    height: 1.6,
                   ),
                   textAlign: TextAlign.center,
                 ),
               ),
               
-              const Spacer(flex: 3), // Pendorong bawah yang lebih fleksibel
+              const Spacer(flex: 3),
               
-              // Tombol Masuk (Login) - Utama (Solid Blue Pill)
               SizedBox(
-                height: 54, // Tinggi lebih tebal untuk kenyamanan sentuh
+                height: 54,
                 child: ElevatedButton(
-                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const LoginPage())), // Navigasi ke halaman Login
+                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const LoginPage())),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1E88E5), // Biru primer
+                    backgroundColor: const Color(0xFF1E88E5),
                     foregroundColor: Colors.white,
-                    elevation: 4, // Bayangan halus
-                    shadowColor: const Color(0xFF1E88E5).withValues(alpha: 0.3), // Bayangan biru
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)), // Tombol bentuk pil (pill shape)
+                    elevation: 4,
+                    shadowColor: const Color(0xFF1E88E5).withValues(alpha: 0.3),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                   ),
                   child: const Text("Masuk", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 ),
               ),
-              const SizedBox(height: 14), // Jarak antar tombol
+              const SizedBox(height: 14),
               
-              // Tombol Pendaftaran (Registrasi) - Sekunder (Clean Outlined Pill)
               SizedBox(
                 height: 54,
                 child: OutlinedButton(
-                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterPage())), // Navigasi ke halaman Registrasi
+                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterPage())),
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Color(0xFF1E88E5), width: 1.8), // Border biru agak tebal
+                    side: const BorderSide(color: Color(0xFF1E88E5), width: 1.8),
                     foregroundColor: const Color(0xFF1E88E5),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)), // Tombol bentuk pil
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                   ),
                   child: const Text("Registrasi", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 ),
               ),
-              const SizedBox(height: 16), // Jarak margin bawah
+              const SizedBox(height: 16),
             ],
           ),
         ),

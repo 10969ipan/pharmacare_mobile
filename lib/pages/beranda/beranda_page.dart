@@ -7,7 +7,6 @@ import './search_field.dart';
 import './obat_list.dart';
 import './obat_card.dart';
 
-// Halaman Utama/Beranda Aplikasi Pharmacare
 class BerandaPage extends StatefulWidget {
   const BerandaPage({super.key});
 
@@ -16,44 +15,42 @@ class BerandaPage extends StatefulWidget {
 }
 
 class _BerandaPageState extends State<BerandaPage> {
-  String _searchQuery = ''; // Menyimpan kata kunci pencarian dari pengguna
-  String _selectedCategory = 'Semua'; // Kategori obat terpilih untuk filter aktif
+  String _searchQuery = '';
+  String _selectedCategory = 'Semua';
 
-  // Daftar kategori obat yang ditampilkan pada menu pil filter
   final List<String> _categories = ['Semua', 'Resep', 'Bebas', 'Vitamin', 'Pereda Nyeri', 'Herbal'];
 
   @override
   Widget build(BuildContext context) {
-    // Memproses penyaringan obat berdasarkan input cari dan kategori terpilih
     final filteredObat = obatList.where((obat) {
-      final matchesSearch = (obat['judul'] as String).toLowerCase().contains(_searchQuery.toLowerCase()); // Filter nama obat
-      final matchesCategory = _selectedCategory == 'Semua' || (obat['kategori'] as String).toLowerCase() == _selectedCategory.toLowerCase(); // Filter kategori obat
-      return matchesSearch && matchesCategory; // Mengembalikan hasil penyaringan yang sesuai kedua filter
+      final matchesSearch = (obat['judul'] as String).toLowerCase().contains(_searchQuery.toLowerCase());
+      final matchesCategory = _selectedCategory == 'Semua' || (obat['kategori'] as String).toLowerCase() == _selectedCategory.toLowerCase();
+      return matchesSearch && matchesCategory;
     }).toList();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFAFAFA), // Latar belakang abu-abu sangat terang
+      backgroundColor: const Color(0xFFFAFAFA),
       appBar: AppBar(
-        backgroundColor: Colors.blue[900], // Latar belakang AppBar biru gelap senada halaman lain
-        elevation: 0, // Menghilangkan efek bayangan bawah AppBar
-        centerTitle: false, // Menyejajarkan teks judul ke sebelah kiri (ala modern)
-        title: const Text('Pharmacare', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20)), // Judul aplikasi
+        backgroundColor: Colors.blue[900],
+        elevation: 0,
+        centerTitle: false,
+        title: const Text('Pharmacare', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20)),
         actions: [
           IconButton(
-            icon: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.white, size: 23), // Ikon tombol menu pesan di sebelah keranjang
-            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const PesanPage())), // Buka halaman obrolan pesan & konsultasi
+            icon: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.white, size: 23),
+            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const PesanPage())),
           ),
           Consumer<CartProvider>(
             builder: (context, cartProvider, child) {
               return Padding(
-                padding: const EdgeInsets.only(right: 12.0), // Jarak badge dari batas kanan layar
+                padding: const EdgeInsets.only(right: 12.0),
                 child: Badge(
-                  label: Text('${cartProvider.totalItemsCount}', style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)), // Teks jumlah item di keranjang
-                  isLabelVisible: cartProvider.totalItemsCount > 0, // Badge hanya terlihat jika keranjang berisi item
-                  backgroundColor: Colors.redAccent, // Warna merah cerah untuk badge jumlah
+                  label: Text('${cartProvider.totalItemsCount}', style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+                  isLabelVisible: cartProvider.totalItemsCount > 0,
+                  backgroundColor: Colors.redAccent,
                   child: IconButton(
-                    icon: const Icon(Icons.shopping_cart, color: Colors.white, size: 24), // Ikon tombol keranjang belanja
-                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const CartPage())), // Buka halaman keranjang belanja
+                    icon: const Icon(Icons.shopping_cart, color: Colors.white, size: 24),
+                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const CartPage())),
                   ),
                 ),
               );
@@ -64,148 +61,143 @@ class _BerandaPageState extends State<BerandaPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start, // Rata kiri untuk seluruh isi kolom body
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Bagian Header Pencarian
               Container(
-                width: double.infinity, // Lebar penuh layar
-                color: Colors.white, // Latar belakang putih bersih
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16), // Jarak di dalam area kolom cari
-                child: SearchField(onChanged: (value) => setState(() => _searchQuery = value)), // Kolom input cari dinamis
+                width: double.infinity,
+                color: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                child: SearchField(onChanged: (value) => setState(() => _searchQuery = value)),
               ),
-              const SizedBox(height: 16), // Spasi pemisah vertikal
+              const SizedBox(height: 16),
               
-              // Banner Promosi Spesial
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0), // Jarak kiri-kanan dari layar
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Container(
-                  width: double.infinity, // Lebar penuh banner
-                  height: 110, // Tinggi banner promosi
+                  width: double.infinity,
+                  height: 110,
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: [Colors.blue[700]!, Colors.blue[900]!], begin: Alignment.topLeft, end: Alignment.bottomRight), // Gradasi warna biru
-                    borderRadius: BorderRadius.circular(14), // Sudut melengkung banner
-                    boxShadow: [BoxShadow(color: Colors.blue.withValues(alpha: 0.2), blurRadius: 8, offset: const Offset(0, 4))], // Bayangan biru lembut
+                    gradient: LinearGradient(colors: [Colors.blue[700]!, Colors.blue[900]!], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                    borderRadius: BorderRadius.circular(14),
+                    boxShadow: [BoxShadow(color: Colors.blue.withValues(alpha: 0.2), blurRadius: 8, offset: const Offset(0, 4))],
                   ),
                   child: Stack(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(16.0), // Jarak teks di dalam banner
+                        padding: const EdgeInsets.all(16.0),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start, // Teks rata kiri
-                          mainAxisAlignment: MainAxisAlignment.center, // Pusatkan teks secara vertikal
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3), // Spasi dalam label promo
-                              decoration: BoxDecoration(color: Colors.amber, borderRadius: BorderRadius.circular(6)), // Latar kuning sudut melengkung
-                              child: const Text("PROMO SEHAT", style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: Colors.black87)), // Label penanda promo
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                              decoration: BoxDecoration(color: Colors.amber, borderRadius: BorderRadius.circular(6)),
+                              child: const Text("PROMO SEHAT", style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: Colors.black87)),
                             ),
-                            const SizedBox(height: 6), // Jarak antar teks
-                            const Text("Hemat Hingga 30%", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)), // Judul promo banner
-                            const SizedBox(height: 2), // Jarak antar teks
-                            const Text("Beli vitamin & suplemen harian Anda", style: TextStyle(fontSize: 11, color: Colors.white70)), // Subjudul deskripsi promo
+                            const SizedBox(height: 6),
+                            const Text("Hemat Hingga 30%", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+                            const SizedBox(height: 2),
+                            const Text("Beli vitamin & suplemen harian Anda", style: TextStyle(fontSize: 11, color: Colors.white70)),
                           ],
                         ),
                       ),
                       Positioned(
-                        right: 20, // Jarak ikon dari kanan banner
-                        top: 25, // Jarak ikon dari atas banner
-                        child: Icon(Icons.health_and_safety_rounded, size: 60, color: Colors.white.withValues(alpha: 0.18)), // Ikon logo kesehatan samar
+                        right: 20,
+                        top: 25,
+                        child: Icon(Icons.health_and_safety_rounded, size: 60, color: Colors.white.withValues(alpha: 0.18)),
                       ),
                     ],
                   ),
                 ),
               ),
-              const SizedBox(height: 20), // Spasi pemisah vertikal
+              const SizedBox(height: 20),
 
-              // Filter Berdasarkan Kategori
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0), // Jarak kiri-kanan teks judul kategori
-                child: Text('Kategori Obat', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xFF2C3E50))), // Judul bagian kategori
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text('Kategori Obat', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xFF2C3E50))),
               ),
-              const SizedBox(height: 10), // Jarak di bawah judul kategori
+              const SizedBox(height: 10),
               SizedBox(
-                height: 36, // Tinggi barisan filter pil kategori
+                height: 36,
                 child: ListView.builder(
-                  scrollDirection: Axis.horizontal, // Arah gulir horizontal (menyamping)
-                  padding: const EdgeInsets.symmetric(horizontal: 16), // Jarak kiri-kanan list
-                  itemCount: _categories.length, // Jumlah pil filter kategori
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  itemCount: _categories.length,
                   itemBuilder: (context, index) {
-                    final category = _categories[index]; // Mengambil nama kategori saat ini
-                    final isSelected = _selectedCategory == category; // Memeriksa apakah sedang aktif dipilih
+                    final category = _categories[index];
+                    final isSelected = _selectedCategory == category;
                     return GestureDetector(
-                      onTap: () => setState(() => _selectedCategory = category), // Ganti filter aktif saat di-tap
+                      onTap: () => setState(() => _selectedCategory = category),
                       child: Container(
-                        margin: const EdgeInsets.only(right: 8), // Jarak antar pil kategori
-                        padding: const EdgeInsets.symmetric(horizontal: 16), // Padding di dalam pil kategori
-                        alignment: Alignment.center, // Pusatkan teks di tengah pil
+                        margin: const EdgeInsets.only(right: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: isSelected ? const Color(0xFF1E88E5) : Colors.white, // Biru jika terpilih, putih jika tidak
-                          borderRadius: BorderRadius.circular(10), // Sudut bulat pil filter
-                          border: Border.all(color: isSelected ? const Color(0xFF1E88E5) : const Color(0xFFEEEEEE), width: 1.5), // Garis tepi pil
+                          color: isSelected ? const Color(0xFF1E88E5) : Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: isSelected ? const Color(0xFF1E88E5) : const Color(0xFFEEEEEE), width: 1.5),
                         ),
-                        child: Text(category, style: TextStyle(color: isSelected ? Colors.white : Colors.grey[700], fontWeight: isSelected ? FontWeight.bold : FontWeight.w600, fontSize: 12)), // Teks kategori
+                        child: Text(category, style: TextStyle(color: isSelected ? Colors.white : Colors.grey[700], fontWeight: isSelected ? FontWeight.bold : FontWeight.w600, fontSize: 12)),
                       ),
                     );
                   },
                 ),
               ),
-              const SizedBox(height: 24), // Spasi pemisah vertikal
+              const SizedBox(height: 24),
 
-              // Bagian Judul dan Jumlah Total Hasil Rekomendasi
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0), // Jarak dari batas tepi layar
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween, // Sejajarkan teks kiri dan kanan berjauhan
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Rekomendasi Untukmu', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xFF2C3E50))), // Teks judul bagian rekomendasi
-                    Text('${filteredObat.length} Produk', style: TextStyle(fontSize: 12, color: Colors.grey[500], fontWeight: FontWeight.w600)), // Jumlah total obat tersaring
+                    const Text('Rekomendasi Untukmu', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xFF2C3E50))),
+                    Text('${filteredObat.length} Produk', style: TextStyle(fontSize: 12, color: Colors.grey[500], fontWeight: FontWeight.w600)),
                   ],
                 ),
               ),
-              const SizedBox(height: 12), // Jarak di bawah judul hasil rekomendasi
+              const SizedBox(height: 12),
 
-              // Grid List Tampilan Produk Obat
               filteredObat.isEmpty
                   ? Center(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 24.0), // Padding dalam wadah kosong
+                        padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 24.0),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center, // Tengahkan isi kolom
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.search_off_rounded, size: 70, color: Colors.grey[300]), // Ikon hasil tidak ditemukan
-                            const SizedBox(height: 12), // Jarak vertikal
-                            const Text('Obat Tidak Ditemukan', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF2C3E50))), // Judul pesan kosong
-                            const SizedBox(height: 6), // Jarak vertikal
-                            Text('Kata kunci tidak cocok dengan obat apa pun di kategori $_selectedCategory.', style: TextStyle(color: Colors.grey[500], fontSize: 13), textAlign: TextAlign.center), // Penjelasan detail kosong
+                            Icon(Icons.search_off_rounded, size: 70, color: Colors.grey[300]),
+                            const SizedBox(height: 12),
+                            const Text('Obat Tidak Ditemukan', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF2C3E50))),
+                            const SizedBox(height: 6),
+                            Text('Kata kunci tidak cocok dengan obat apa pun di kategori $_selectedCategory.', style: TextStyle(color: Colors.grey[500], fontSize: 13), textAlign: TextAlign.center),
                           ],
                         ),
                       ),
                     )
                   : Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0), // Jarak luar GridView kiri-kanan
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(), // Menonaktifkan scroll independen GridView
-                        shrinkWrap: true, // Ukuran grid menyesuaikan total tinggi konten di dalamnya
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, // Membagi layar menjadi 2 kolom produk
-                          crossAxisSpacing: 14.0, // Jarak antar kolom horizontal
-                          mainAxisSpacing: 14.0, // Jarak antar kartu vertikal
-                          mainAxisExtent: 270, // Tinggi tetap masing-masing kartu produk
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 14.0,
+                          mainAxisSpacing: 14.0,
+                          mainAxisExtent: 270,
                         ),
-                        itemCount: filteredObat.length, // Total data obat yang lolos saring
+                        itemCount: filteredObat.length,
                         itemBuilder: (context, index) {
-                          final obat = filteredObat[index]; // Mengambil data obat per baris
+                          final obat = filteredObat[index];
                           return ObatCard(
                             judul: obat['judul'] as String,
                             harga: obat['harga'] as String,
                             foto: obat['foto'] as String,
                             kategori: obat['kategori'] as String,
                             deskripsi: obat['deskripsi'] as String,
-                          ); // Merender widget kartu obat
+                          );
                         },
                       ),
                     ),
-              const SizedBox(height: 20), // Spasi penutup di bawah grid
+              const SizedBox(height: 20),
             ],
           ),
         ),

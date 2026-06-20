@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
-// Halaman Pusat Bantuan (FAQ)
 class PusatBantuanPage extends StatelessWidget {
   const PusatBantuanPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // List pertanyaan dan jawaban FAQ
     final faqs = [
       {
         'q': 'Bagaimana cara memesan obat resep?',
@@ -27,30 +25,29 @@ class PusatBantuanPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFAFAFA), // Latar abu-abu terang
+      backgroundColor: const Color(0xFFFAFAFA),
       appBar: AppBar(
-        backgroundColor: Colors.blue[900], // AppBar biru tua
-        title: const Text('Pusat Bantuan', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)), // Judul halaman
-        iconTheme: const IconThemeData(color: Colors.white), // Tombol back putih
+        backgroundColor: Colors.blue[900],
+        title: const Text('Pusat Bantuan', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Column(
         children: [
-          // Daftar List FAQ Akordion
           Expanded(
             child: ListView.builder(
-              padding: const EdgeInsets.all(16), // Padding list
-              itemCount: faqs.length, // Jumlah FAQ
+              padding: const EdgeInsets.all(16),
+              itemCount: faqs.length,
               itemBuilder: (context, index) {
-                final item = faqs[index]; // Ambil data FAQ
+                final item = faqs[index];
                 return Card(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Bulat sudut kartu
-                  margin: const EdgeInsets.only(bottom: 12), // Jarak spasi bawah
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  margin: const EdgeInsets.only(bottom: 12),
                   child: ExpansionTile(
-                    title: Text(item['q']!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Color(0xFF2C3E50))), // Teks pertanyaan tebal
+                    title: Text(item['q']!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Color(0xFF2C3E50))),
                     children: [
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16), // Jarak padding teks jawaban
-                        child: Text(item['a']!, style: TextStyle(color: Colors.grey[700], fontSize: 13, height: 1.5)), // Paragraf teks jawaban
+                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                        child: Text(item['a']!, style: TextStyle(color: Colors.grey[700], fontSize: 13, height: 1.5)),
                       ),
                     ],
                   ),
@@ -58,23 +55,22 @@ class PusatBantuanPage extends StatelessWidget {
               },
             ),
           ),
-          // Tombol Hubungi CS via WhatsApp
           Padding(
-            padding: const EdgeInsets.all(16.0), // Padding tombol
+            padding: const EdgeInsets.all(16.0),
             child: SizedBox(
-              width: double.infinity, // Lebar penuh
-              height: 48, // Tinggi tombol 48px
+              width: double.infinity,
+              height: 48,
               child: ElevatedButton.icon(
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Menghubungkan ke Customer Service via WhatsApp...')), // Notifikasi kirim pesan WA
+                    const SnackBar(content: Text('Menghubungkan ke Customer Service via WhatsApp...')),
                   );
                 },
-                icon: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.white), // Ikon obrolan
-                label: const Text('Hubungi CS via WhatsApp', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)), // Label tombol
+                icon: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.white),
+                label: const Text('Hubungi CS via WhatsApp', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green[700], // Latar belakang hijau WhatsApp
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)), // Bulat sudut 8px
+                  backgroundColor: Colors.green[700],
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 ),
               ),
             ),

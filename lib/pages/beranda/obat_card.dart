@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import './tombol_pesan.dart';
-import './detail_obat_page.dart'; // Import halaman detail obat
+import './detail_obat_page.dart';
 
-// Widget Kartu Tampilan Produk Obat
 class ObatCard extends StatelessWidget {
-  final String judul; // Nama obat
-  final String harga; // Harga obat
-  final String foto; // Alamat gambar obat
-  final String kategori; // Kategori jenis obat
-  final String deskripsi; // Deskripsi lengkap obat
+  final String judul;
+  final String harga;
+  final String foto;
+  final String kategori;
+  final String deskripsi;
 
   const ObatCard({
     super.key,
@@ -19,27 +18,25 @@ class ObatCard extends StatelessWidget {
     required this.deskripsi,
   });
 
-  // Menentukan warna latar belakang badge berdasarkan kategori obat
   Color _getBadgeBgColor() {
     switch (kategori.toLowerCase()) {
-      case 'resep': return const Color(0xFFFFEBEE); // Merah muda untuk obat resep
-      case 'bebas': return const Color(0xFFE8F5E9); // Hijau muda untuk obat bebas
-      case 'vitamin': return const Color(0xFFFFF8E1); // Kuning muda untuk suplemen vitamin
-      case 'pereda nyeri': return const Color(0xFFE3F2FD); // Biru muda untuk pereda nyeri
-      case 'herbal': return const Color(0xFFE0F2F1); // Teal muda untuk obat herbal
-      default: return const Color(0xFFF5F5F5); // Abu-abu muda bawaan
+      case 'resep': return const Color(0xFFFFEBEE);
+      case 'bebas': return const Color(0xFFE8F5E9);
+      case 'vitamin': return const Color(0xFFFFF8E1);
+      case 'pereda nyeri': return const Color(0xFFE3F2FD);
+      case 'herbal': return const Color(0xFFE0F2F1);
+      default: return const Color(0xFFF5F5F5);
     }
   }
 
-  // Menentukan warna teks badge berdasarkan kategori obat
   Color _getBadgeTextColor() {
     switch (kategori.toLowerCase()) {
-      case 'resep': return const Color(0xFFC62828); // Merah tua
-      case 'bebas': return const Color(0xFF2E7D32); // Hijau tua
-      case 'vitamin': return const Color(0xFFF57F17); // Kuning tua
-      case 'pereda nyeri': return const Color(0xFF1565C0); // Biru tua
-      case 'herbal': return const Color(0xFF00695C); // Teal tua
-      default: return const Color(0xFF616161); // Abu-abu tua
+      case 'resep': return const Color(0xFFC62828);
+      case 'bebas': return const Color(0xFF2E7D32);
+      case 'vitamin': return const Color(0xFFF57F17);
+      case 'pereda nyeri': return const Color(0xFF1565C0);
+      case 'herbal': return const Color(0xFF00695C);
+      default: return const Color(0xFF616161);
     }
   }
 
@@ -47,17 +44,16 @@ class ObatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white, // Latar belakang putih kartu
-        borderRadius: BorderRadius.circular(16), // Sudut bulat kartu
-        border: Border.all(color: const Color(0xFFEEEEEE), width: 1.5), // Garis pembatas kartu
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFEEEEEE), width: 1.5),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start, // Meratakan konten ke kiri
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: GestureDetector(
               onTap: () {
-                // Aksi navigasi ke halaman detail ketika gambar obat di-tap
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -74,24 +70,24 @@ class ObatCard extends StatelessWidget {
               child: Stack(
                 children: [
                   ClipRRect(
-                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(14), topRight: Radius.circular(14)), // Sudut bulat gambar atas saja
+                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(14), topRight: Radius.circular(14)),
                     child: Image.asset(
-                      foto, // Memuat file gambar obat
-                      width: double.infinity, // Lebar penuh menyesuaikan kartu
-                      fit: BoxFit.cover, // Gambar dipotong presisi memenuhi area
+                      foto,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) => Container(
-                        color: const Color(0xFFEBF3FC), // Latar cadangan jika gambar gagal dimuat
-                        child: const Center(child: Icon(Icons.medication_liquid_rounded, size: 44, color: Color(0xFF1E88E5))), // Ikon cadangan obat
+                        color: const Color(0xFFEBF3FC),
+                        child: const Center(child: Icon(Icons.medication_liquid_rounded, size: 44, color: Color(0xFF1E88E5))),
                       ),
                     ),
                   ),
                   Positioned(
-                    top: 8, // Jarak badge dari batas atas
-                    left: 8, // Jarak badge dari batas kiri
+                    top: 8,
+                    left: 8,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), // Padding dalam badge kategori
-                      decoration: BoxDecoration(color: _getBadgeBgColor(), borderRadius: BorderRadius.circular(6)), // Latar & sudut badge
-                      child: Text(kategori, style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: _getBadgeTextColor())), // Label kategori
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(color: _getBadgeBgColor(), borderRadius: BorderRadius.circular(6)),
+                      child: Text(kategori, style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: _getBadgeTextColor())),
                     ),
                   ),
                 ],
@@ -99,15 +95,15 @@ class ObatCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(10.0), // Jarak dalam bagian info teks
+            padding: const EdgeInsets.all(10.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start, // Rata kiri info teks
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(judul, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Color(0xFF2C3E50), height: 1.3), maxLines: 2, overflow: TextOverflow.ellipsis), // Nama produk (max 2 baris)
-                const SizedBox(height: 4), // Spasi vertikal
-                Text(harga, style: const TextStyle(fontSize: 14, color: Color(0xFF2E7D32), fontWeight: FontWeight.w700)), // Harga obat
-                const SizedBox(height: 8), // Spasi vertikal
-                TombolPesan(obat: {'judul': judul, 'harga': harga, 'foto': foto, 'kategori': kategori}), // Tombol untuk memesan obat
+                Text(judul, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Color(0xFF2C3E50), height: 1.3), maxLines: 2, overflow: TextOverflow.ellipsis),
+                const SizedBox(height: 4),
+                Text(harga, style: const TextStyle(fontSize: 14, color: Color(0xFF2E7D32), fontWeight: FontWeight.w700)),
+                const SizedBox(height: 8),
+                TombolPesan(obat: {'judul': judul, 'harga': harga, 'foto': foto, 'kategori': kategori}),
               ],
             ),
           ),

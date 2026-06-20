@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
-// Halaman Metode Pembayaran
 class MetodePembayaranPage extends StatelessWidget {
   const MetodePembayaranPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // List opsi metode pembayaran tersimpan
     final metode = [
       {'name': 'Virtual Account Mandiri', 'icon': Icons.account_balance, 'label': 'Mandiri'},
       {'name': 'GoPay E-Wallet', 'icon': Icons.wallet, 'label': 'GoPay (Aktif)'},
@@ -14,35 +12,34 @@ class MetodePembayaranPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFAFAFA), // Latar abu-abu terang
+      backgroundColor: const Color(0xFFFAFAFA),
       appBar: AppBar(
-        backgroundColor: Colors.blue[900], // AppBar biru tua
-        title: const Text('Metode Pembayaran', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)), // Judul halaman
-        iconTheme: const IconThemeData(color: Colors.white), // Tombol back putih
+        backgroundColor: Colors.blue[900],
+        title: const Text('Metode Pembayaran', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Column(
         children: [
-          // Daftar List Metode Pembayaran
           Expanded(
             child: ListView.builder(
-              padding: const EdgeInsets.all(16), // Padding list
-              itemCount: metode.length, // Jumlah metode terdaftar
+              padding: const EdgeInsets.all(16),
+              itemCount: metode.length,
               itemBuilder: (context, index) {
-                final item = metode[index]; // Ambil data metode
+                final item = metode[index];
                 return Card(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), // Bulat sudut kartu
-                  margin: const EdgeInsets.only(bottom: 12), // Jarak spasi bawah
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  margin: const EdgeInsets.only(bottom: 12),
                   child: ListTile(
                     leading: CircleAvatar(
-                      backgroundColor: Colors.blue[50], // Latar belakang bulat biru muda
-                      child: Icon(item['icon'] as IconData, color: Colors.blue[900]), // Ikon representasi metode
+                      backgroundColor: Colors.blue[50],
+                      child: Icon(item['icon'] as IconData, color: Colors.blue[900]),
                     ),
-                    title: Text(item['name'] as String, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)), // Nama metode pembayaran
-                    subtitle: Text(item['label'] as String, style: TextStyle(color: Colors.grey[500], fontSize: 12)), // Sub-keterangan singkat metode
-                    trailing: const Icon(Icons.check_circle, color: Colors.green), // Ikon ceklis hijau terpilih
+                    title: Text(item['name'] as String, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                    subtitle: Text(item['label'] as String, style: TextStyle(color: Colors.grey[500], fontSize: 12)),
+                    trailing: const Icon(Icons.check_circle, color: Colors.green),
                     onTap: () {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('${item['name']} terpilih sebagai metode pembayaran utama.')), // Toast konfirmasi terpilih
+                        SnackBar(content: Text('${item['name']} terpilih sebagai metode pembayaran utama.')),
                       );
                     },
                   ),
@@ -50,23 +47,22 @@ class MetodePembayaranPage extends StatelessWidget {
               },
             ),
           ),
-          // Tombol Tambah Metode Baru
           Padding(
-            padding: const EdgeInsets.all(16.0), // Padding tombol
+            padding: const EdgeInsets.all(16.0),
             child: SizedBox(
-              width: double.infinity, // Lebar penuh
-              height: 48, // Tinggi tombol 48px
+              width: double.infinity,
+              height: 48,
               child: ElevatedButton.icon(
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Fitur tambah metode pembayaran baru sedang disiapkan!')), // Notifikasi sedang disiapkan
+                    const SnackBar(content: Text('Fitur tambah metode pembayaran baru sedang disiapkan!')),
                   );
                 },
-                icon: const Icon(Icons.add, color: Colors.white), // Ikon plus
-                label: const Text('Tambah Metode Baru', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)), // Label tombol
+                icon: const Icon(Icons.add, color: Colors.white),
+                label: const Text('Tambah Metode Baru', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue[900], // Biru tua
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)), // Bulat sudut 8px
+                  backgroundColor: Colors.blue[900],
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 ),
               ),
             ),
