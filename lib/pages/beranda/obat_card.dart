@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './tombol_pesan.dart';
+import './detail_obat_page.dart'; // Import halaman detail obat
 
 // Widget Kartu Tampilan Produk Obat
 class ObatCard extends StatelessWidget {
@@ -7,6 +8,7 @@ class ObatCard extends StatelessWidget {
   final String harga; // Harga obat
   final String foto; // Alamat gambar obat
   final String kategori; // Kategori jenis obat
+  final String deskripsi; // Deskripsi lengkap obat
 
   const ObatCard({
     super.key,
@@ -14,6 +16,7 @@ class ObatCard extends StatelessWidget {
     required this.harga,
     required this.foto,
     required this.kategori,
+    required this.deskripsi,
   });
 
   // Menentukan warna latar belakang badge berdasarkan kategori obat
@@ -52,30 +55,47 @@ class ObatCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start, // Meratakan konten ke kiri
         children: [
           Expanded(
-            child: Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(14), topRight: Radius.circular(14)), // Sudut bulat gambar atas saja
-                  child: Image.asset(
-                    foto, // Memuat file gambar obat
-                    width: double.infinity, // Lebar penuh menyesuaikan kartu
-                    fit: BoxFit.cover, // Gambar dipotong presisi memenuhi area
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      color: const Color(0xFFEBF3FC), // Latar cadangan jika gambar gagal dimuat
-                      child: const Center(child: Icon(Icons.medication_liquid_rounded, size: 44, color: Color(0xFF1E88E5))), // Ikon cadangan obat
+            child: GestureDetector(
+              onTap: () {
+                // Aksi navigasi ke halaman detail ketika gambar obat di-tap
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailObatPage(
+                      judul: judul,
+                      harga: harga,
+                      foto: foto,
+                      kategori: kategori,
+                      deskripsi: deskripsi,
                     ),
                   ),
-                ),
-                Positioned(
-                  top: 8, // Jarak badge dari batas atas
-                  left: 8, // Jarak badge dari batas kiri
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), // Padding dalam badge kategori
-                    decoration: BoxDecoration(color: _getBadgeBgColor(), borderRadius: BorderRadius.circular(6)), // Latar & sudut badge
-                    child: Text(kategori, style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: _getBadgeTextColor())), // Label kategori
+                );
+              },
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(14), topRight: Radius.circular(14)), // Sudut bulat gambar atas saja
+                    child: Image.asset(
+                      foto, // Memuat file gambar obat
+                      width: double.infinity, // Lebar penuh menyesuaikan kartu
+                      fit: BoxFit.cover, // Gambar dipotong presisi memenuhi area
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: const Color(0xFFEBF3FC), // Latar cadangan jika gambar gagal dimuat
+                        child: const Center(child: Icon(Icons.medication_liquid_rounded, size: 44, color: Color(0xFF1E88E5))), // Ikon cadangan obat
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                  Positioned(
+                    top: 8, // Jarak badge dari batas atas
+                    left: 8, // Jarak badge dari batas kiri
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), // Padding dalam badge kategori
+                      decoration: BoxDecoration(color: _getBadgeBgColor(), borderRadius: BorderRadius.circular(6)), // Latar & sudut badge
+                      child: Text(kategori, style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: _getBadgeTextColor())), // Label kategori
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Padding(

@@ -188,9 +188,15 @@ class _BerandaPageState extends State<BerandaPage> {
                           mainAxisExtent: 270, // Tinggi tetap masing-masing kartu produk
                         ),
                         itemCount: filteredObat.length, // Total data obat yang lolos saring
-                        itemBuilder: (_, index) {
+                        itemBuilder: (context, index) {
                           final obat = filteredObat[index]; // Mengambil data obat per baris
-                          return ObatCard(judul: obat['judul'] as String, harga: obat['harga'] as String, foto: obat['foto'] as String, kategori: obat['kategori'] as String); // Merender widget kartu obat
+                          return ObatCard(
+                            judul: obat['judul'] as String,
+                            harga: obat['harga'] as String,
+                            foto: obat['foto'] as String,
+                            kategori: obat['kategori'] as String,
+                            deskripsi: obat['deskripsi'] as String,
+                          ); // Merender widget kartu obat
                         },
                       ),
                     ),
